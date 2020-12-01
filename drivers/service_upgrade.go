@@ -3,6 +3,7 @@ package drivers
 import (
 	"encoding/json"
 	"fmt"
+	client "github.com/rancher/go-rancher/v2"
 	"io/ioutil"
 	"net/http"
 	"regexp"
@@ -13,7 +14,6 @@ import (
 	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
 	v1client "github.com/rancher/go-rancher/client"
-	"github.com/rancher/go-rancher/v2"
 	"github.com/rancher/webhook-service/model"
 )
 
@@ -101,9 +101,10 @@ func (s *ServiceUpgradeDriver) Execute(conf interface{}, apiClient *client.Ranch
 	switch config.PayloadFormat {
 	case "alicloud":
 		alicloudFullName, fullnameOk := repository.(map[string]interface{})["repo_full_name"].(string)
-		alicloudRegion, regionOk := repository.(map[string]interface{})["region"].(string)
+		_, regionOk := repository.(map[string]interface{})["region"].(string)
 		if fullnameOk && regionOk {
-			imageName := "registry." + alicloudRegion + ".aliyuncs.com/" + alicloudFullName
+			//			imageName := "registry." + alicloudRegion + ".aliyuncs.com/" + alicloudFullName
+			imageName := "643690352380.dkr.ecr.us-east-1.amazonaws.com/" + alicloudFullName
 			pushedImage = imageName + ":" + pushedTag
 		} else {
 			return http.StatusBadRequest, fmt.Errorf("Alicloud Docker Hub response provided without image name")
