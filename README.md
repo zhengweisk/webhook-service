@@ -18,6 +18,7 @@ For bugs, questions, comments, corrections, suggestions, etc., open an issue in
 
 Or just [click here](//github.com/rancher/rancher/issues/new?title=%5Bwebhook-service%5D%20) to create a new issue.
 
+官方的webhook 直接用go编译不通过，需要加go mod
 
 ## License
 Copyright (c) 2014-2016 [Rancher Labs, Inc.](http://rancher.com)
